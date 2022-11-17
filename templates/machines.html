@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')}}" type="image/png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-  <title>Caronte</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png')}}" type="image/png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <title>Caronte</title>
 </head>
 
 <body>
-  <div id="particles-js"></div>
-  <div class="container" style="position: relative;">
-    <h4 class="text-center">Caronte</h4><br>
-    <div class="borderTable align-middle">
-      <table id="equipos" class="table table-striped table-dark table-hover" style="width:100%">
-        <thead>
-          <tr>
-            <th>Nombre descriptivo</th>
-            <th>Dirección MAC</th>
-            <th>Dirección IP</th>
-            <th class="text-center">Wake on LAN</th>
-            <th class="text-center">Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for machine in machines: %}
-          <tr>
-            <td>{{ machine['name'] }}</td>
-            <td>{{ machine['mac'] }}</td>
-            <td>{{ machine['ip'] }}</td>
-            <td class="text-center"><a href="/wol/{{ machines.index(machine) }}"><svg class="powerOnIcon" xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512">
+    <div id="particles-js"></div>
+    <div class="container" style="position: relative;">
+        <h4 class="text-center">Caronte</h4><br>
+        <div class="borderTable align-middle">
+            <table id="equipos" class="table table-striped table-dark table-hover" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Nombre descriptivo</th>
+                        <th>Dirección MAC</th>
+                        <th>Dirección IP</th>
+                        <th class="text-center">Wake on LAN</th>
+                        <th class="text-center">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for machine in machines: %}
+                    <tr>
+                        <td>{{ machine['name'] }}</td>
+                        <td>{{ machine['mac'] }}</td>
+                        <td>{{ machine['ip'] }}</td>
+                        <td class="text-center"><a href="#" onclick="wakeMachine($(this), '/wol/{{ machines.index(machine) }}');"><svg class="powerOnIcon"
+                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path
                     d="M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z" />
                 </svg></a></td>
-            <td class="text-center"><a href="#" onclick="requestPing($(this), '/ping/{{ machines.index(machine) }}');"><svg class="icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM256 336c-18 0-32 14-32 32s13.1 32 32 32c17.1 0 32-14 32-32S273.1 336 256 336zM289.1 128h-51.1C199 128 168 159 168 198c0 13 11 24 24 24s24-11 24-24C216 186 225.1 176 237.1 176h51.1C301.1 176 312 186 312 198c0 8-4 14.1-11 18.1L244 251C236 256 232 264 232 272V288c0 13 11 24 24 24S280 301 280 288V286l45.1-28c21-13 34-36 34-60C360 159 329 128 289.1 128z"/></svg></a>
-            </td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <a href="{{ url_for('machineEdit')}}">Editar</a>
-    </div>
+                        <td class="text-center"><a href="#" onclick="requestPing($(this), '/ping/{{ machines.index(machine) }}');"><svg class="icono" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-114.7 0-208-93.31-208-208S141.3 48 256 48s208 93.31 208 208S370.7 464 256 464zM256 336c-18 0-32 14-32 32s13.1 32 32 32c17.1 0 32-14 32-32S273.1 336 256 336zM289.1 128h-51.1C199 128 168 159 168 198c0 13 11 24 24 24s24-11 24-24C216 186 225.1 176 237.1 176h51.1C301.1 176 312 186 312 198c0 8-4 14.1-11 18.1L244 251C236 256 232 264 232 272V288c0 13 11 24 24 24S280 301 280 288V286l45.1-28c21-13 34-36 34-60C360 159 329 128 289.1 128z"/></svg></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ url_for('machineEdit')}}">Editar</a>
+        </div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -53,33 +53,47 @@
 <script src="{{ url_for('static', filename='particles.min.js')}}"></script>
 <script src="{{ url_for('static', filename='particles.js')}}"></script>
 <script>
-  $(document).ready(function () {
-    $('#equipos').DataTable({
-      order: [[1, 'desc']],
-      language: {
-        lengthMenu: 'Elementos por página _MENU_ ',
-        zeroRecords: 'No se encuentran resultados',
-        info: 'Página _PAGE_ de _PAGES_',
-        infoEmpty: 'No se encuentran resultados',
-        infoFiltered: '',
-        search: 'Buscar:',
-        paginate: {
-          next: ">",
-          previous: "<"
-        }
-      },
+    $(document).ready(function() {
+        $('#equipos').DataTable({
+            order: [
+                [1, 'desc']
+            ],
+            language: {
+                lengthMenu: 'Elementos por página _MENU_ ',
+                zeroRecords: 'No se encuentran resultados',
+                info: 'Página _PAGE_ de _PAGES_',
+                infoEmpty: 'No se encuentran resultados',
+                infoFiltered: '',
+                search: 'Buscar:',
+                paginate: {
+                    next: ">",
+                    previous: "<"
+                }
+            },
+        });
     });
-  });
 
-  function requestPing(buttonClicked, machinePingURL) {
-    $.ajax({
-      method: 'POST',
-      url: machinePingURL,
-      beforeSend: function () {
-        buttonClicked.html('<svg class="grayIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg>')
-      }
-    }).done(function (data) {
-      buttonClicked.html(data)
-    })
-  }
+    function wakeMachine(buttonClicked, machineWoLURL) {
+        $.ajax({
+            method: 'POST',
+            url: machineWoLURL,
+            beforeSend: function() {
+                buttonClicked.html('<svg class="grayIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg>')
+            }
+        }).done(function(data) {
+            buttonClicked.html(data)
+        })
+    }
+
+    function requestPing(buttonClicked, machinePingURL) {
+        $.ajax({
+            method: 'POST',
+            url: machinePingURL,
+            beforeSend: function() {
+                buttonClicked.html('<svg class="grayIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg>')
+            }
+        }).done(function(data) {
+            buttonClicked.html(data)
+        })
+    }
 </script>
