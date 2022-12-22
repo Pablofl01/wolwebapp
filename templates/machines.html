@@ -8,20 +8,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
-    <title>Caronte</title>
+    <title>Wake on LAN</title>
 </head>
 
 <body>
     <div id="particles-js"></div>
     <div class="container" style="position: relative;">
-        <h4 class="text-center">Caronte</h4><br>
+        <h4 class="text-center">Wake on LAN</h4><br>
         <div class="borderTable align-middle">
             <table id="equipos" class="table table-striped table-dark table-hover" style="width:100%">
                 <thead>
                     <tr>
                         <th>Nombre descriptivo</th>
-                        <th>Dirección MAC</th>
-                        <th>Dirección IP</th>
                         <th class="text-center">Wake on LAN</th>
                         <th class="text-center">Estado</th>
                     </tr>
@@ -30,8 +28,6 @@
                     {% for machine in machines: %}
                     <tr>
                         <td>{{ machine['name'] }}</td>
-                        <td>{{ machine['mac'] }}</td>
-                        <td>{{ machine['ip'] }}</td>
                         <td class="text-center"><a href="#" onclick="wakeMachine($(this), '/wol/{{ machines.index(machine) }}');"><svg class="powerOnIcon"
                   xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                   <path
@@ -50,8 +46,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-<script src="{{ url_for('static', filename='particles.min.js')}}"></script>
-<script src="{{ url_for('static', filename='particles.js')}}"></script>
 <script>
     $(document).ready(function() {
         $('#equipos').DataTable({
