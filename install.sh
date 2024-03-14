@@ -50,7 +50,7 @@ for check in git ethtool python3 python3-pip python3-venv openssl wakeonlan
 
 mkdir -p $PARENT_PATH
 cd $PARENT_PATH
-git clone https://github.com/DAT-ETSIT/wolwebapp
+git clone https://github.com/Pablofl01/wolsimpleserver
 cd $WORKING_PATH
 
 if [[ $CERT_PATH == '' ]] || [[ $KEY_PATH == '' ]]; then
