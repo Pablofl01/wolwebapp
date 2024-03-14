@@ -20,7 +20,7 @@ def sendMail(to, subject, message):
     
     msg = MIMEMultipart()
 
-    msg['From'] =  f'{config.MAIL_NAME} <{config.MAIL_PASS}>'
+    msg['From'] =  f'{config.MAIL_NAME} <{config.MAIL_USER}>'
     msg['To'] = to
     msg['Subject'] = subject
     
