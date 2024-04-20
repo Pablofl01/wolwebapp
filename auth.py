@@ -14,7 +14,6 @@ auth = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
-        email_left_part = email.split('@')[0]
         password = request.form.get('password')
         remember = True if request.form.get('remember') != None else False
         #user = User.query.filter_by(email=email).first()
