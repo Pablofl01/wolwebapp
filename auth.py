@@ -14,9 +14,15 @@ auth = Blueprint('auth', __name__)
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
+        email_left_part = email.split('@')[0]
         password = request.form.get('password')
         remember = True if request.form.get('remember') != None else False
-        user = User.query.filter_by(email=email).first()
+        #user = User.query.filter_by(email=email).first()
+        user = User.query.filter(
+            (User.email == email) |
+            (User.email == f"{email}@alumnos.upm.es") |
+            (User.email == f"{email}@upm.es")
+        ).first()
         if user:
             if check_password_hash(user.password, password):
                 login_user(user, remember=remember, duration=timedelta(minutes=30))
